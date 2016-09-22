@@ -4,13 +4,12 @@ extern crate libc;
 extern crate test;
 
 use std::ffi::CString;
-use std::os::raw::c_char;
 
-pub fn discover_primes(up_to_nth_prime: usize) -> Vec<u32> {
+pub fn discover_primes(up_to_nth_prime: u32) -> Vec<u32> {
   let mut primes: Vec<u32> = vec![];
   let mut potential_prime = 2;
 
-  while primes.len() < up_to_nth_prime {
+  while (primes.len() as u32) < up_to_nth_prime {
     let mut composite = false;
 
     for divisor in 2..(potential_prime + 1) {
@@ -28,7 +27,7 @@ pub fn discover_primes(up_to_nth_prime: usize) -> Vec<u32> {
 }
 
 #[no_mangle]
-pub extern fn nth_prime(nth: usize) -> u32 {
+pub extern fn nth_prime(nth: u32) -> u32 {
   match discover_primes(nth).last() {
     Some(&value) => value,
     None => 0
@@ -36,8 +35,9 @@ pub extern fn nth_prime(nth: usize) -> u32 {
 }
 
 #[no_mangle]
-pub extern fn list_primes_up_to_nth(nth: usize) -> *const libc::c_char {
+pub extern fn list_primes_up_to_nth(nth: u32) -> *const libc::c_char {
   let mut primes_list = "".to_string();
+
   for prime in &discover_primes(nth) {
     primes_list.push_str(&prime.to_string());
     primes_list.push_str(", ");
@@ -49,7 +49,7 @@ pub extern fn list_primes_up_to_nth(nth: usize) -> *const libc::c_char {
 }
 
 #[no_mangle]
-pub extern fn deallocate_c_str(str_ptr: *mut c_char) {
+pub extern fn deallocate_c_str(str_ptr: *mut libc::c_char) {
   unsafe { CString::from_raw(str_ptr); }
 }
 
