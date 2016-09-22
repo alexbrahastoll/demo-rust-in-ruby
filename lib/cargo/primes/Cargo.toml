@@ -3,9 +3,6 @@ name = "primes"
 version = "0.1.0"
 authors = ["Alex Braha Stoll <alexbrahastoll@gmail.com>"]
 
-[dependencies]
-libc = "0.2.16"
-
 [lib]
 name = "primes"
 crate-type = ["dylib"]

@@ -1,9 +1,9 @@
 #![feature(test)]
 
-extern crate libc;
 extern crate test;
 
 use std::ffi::CString;
+use std::os::raw::c_char;
 
 pub fn discover_primes(up_to_nth_prime: u32) -> Vec<u32> {
   let mut primes: Vec<u32> = vec![];
@@ -35,7 +35,7 @@ pub extern fn nth_prime(nth: u32) -> u32 {
 }
 
 #[no_mangle]
-pub extern fn list_primes_up_to_nth(nth: u32) -> *const libc::c_char {
+pub extern fn list_primes_up_to_nth(nth: u32) -> *const c_char {
   let mut primes_list = "".to_string();
 
   for prime in &discover_primes(nth) {
@@ -49,7 +49,7 @@ pub extern fn list_primes_up_to_nth(nth: u32) -> *const libc::c_char {
 }
 
 #[no_mangle]
-pub extern fn deallocate_c_str(str_ptr: *mut libc::c_char) {
+pub extern fn deallocate_c_str(str_ptr: *mut c_char) {
   unsafe { CString::from_raw(str_ptr); }
 }
 
