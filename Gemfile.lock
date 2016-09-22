@@ -41,6 +41,7 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (6.4.1.1)
       execjs
+    benchmark-ips (2.7.2)
     bootstrap (4.0.0.alpha4)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
@@ -178,6 +179,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  benchmark-ips (= 2.7.2)
   bootstrap (= 4.0.0.alpha4)
   byebug
   coffee-rails (~> 4.2)
