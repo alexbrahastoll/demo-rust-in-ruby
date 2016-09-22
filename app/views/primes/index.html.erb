@@ -1,13 +1,19 @@
-<h1>Prime numbers</h1>
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <h1 class='def-margin-bottom'>Prime numbers</h1>
 
-<%= form_tag '/primes', method: :get do %>
-  <%= content_tag(:p) do %>
-    Find first <%= text_field_tag :primes_count, nil, value: 10 %> primes
-  <% end %>
-  <%= submit_tag 'Find!' %>
-<% end %>
+      <%= form_tag '/primes', method: :get do %>
+        <%= content_tag(:p) do %>
+          Find first <%= text_field_tag :primes_count, nil, value: 10 %> primes
+        <% end %>
+        <%= submit_tag 'Find!', class: 'btn btn-success' %>
+      <% end %>
 
-<hr />
+      <hr />
 
-<%= @primes %>
+      <%= @primes %>
+    </div>
+  </div>
+</div>
 
