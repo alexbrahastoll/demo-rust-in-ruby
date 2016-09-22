@@ -14,13 +14,10 @@ module RubyPrime
     potential_prime = 2
 
     while primes.size < up_to_nth_prime do
-      divisor_count = 0
       composite = false
 
       for divisor in 2..potential_prime do
-        divisor_count += 1 if potential_prime % divisor == 0
-
-        if divisor_count > 0 && divisor < potential_prime
+        if potential_prime % divisor == 0 && divisor < potential_prime
           composite = true
           break
         end
